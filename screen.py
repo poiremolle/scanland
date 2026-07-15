@@ -10,7 +10,7 @@ class LandWindow:
         self.height = height
         self.screen = pygame.display.set_mode([SCREEN_WIDTH, 500])
         self.all_sprites = pygame.sprite.Group()
-        self.cooldown = 500
+        self.cooldown = 25
 
     def initialize_land(self):
         running = True
@@ -44,7 +44,4 @@ class LandWindow:
         surface = get_surface(img)
 
         Creature(surface, self.all_sprites)
-   
-        # self.screen.blit(surface, (0, 0))
-        # pygame.display.flip()
 
