@@ -14,7 +14,6 @@ class LandWindow:
         pygame.display.flip()
 
         while running:
-            
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
@@ -22,7 +21,6 @@ class LandWindow:
         pygame.quit()
 
     def show_img_on_screen(self, imgPath):
-        print(f"Path to image to be shown: {imgPath}")
         img = remove_white_background(imgPath)
         surface = get_surface(img)
         self.screen.blit(surface, (0, 0))
