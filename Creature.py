@@ -11,7 +11,7 @@ class Creature(pygame.sprite.Sprite):
         self.rect.y = random.choice(
             range(0, SCREEN_HEIGHT - int(SCREEN_HEIGHT * 0.2))
             )
-        self.speed = random.choice(range(1,5))
+        self.speed = random.choice(range(1,8))
         self.bounce_height = [1, 3, 6, 12, -12, -6, -3, -1]
         self.frame = 0
 
