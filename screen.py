@@ -15,7 +15,7 @@ def initialize_land():
 
         screen.fill((230, 215, 255))
 
-        surfaceImage = get_surface_image('apple.JPG')
+        surfaceImage = get_surface_image('apple.jpg')
 
         screen.blit(surfaceImage, (0, 0))
 
