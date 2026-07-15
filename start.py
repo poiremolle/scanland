@@ -29,7 +29,7 @@ def start_program():
     print("Observation started. Press CTRL+C to stop.")
 
     try:
-       print("Code to be written")
+        event_handler.land.initialize_land()
 
     except KeyboardInterrupt:
         print("Keyboard interrupt received. Shutting down...")
