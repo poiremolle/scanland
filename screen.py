@@ -1,15 +1,14 @@
 import pygame
 from imageprocessing import get_surface, remove_white_background
 from Creature import Creature
-
-SCREEN_WIDTH = 500
+from CONSTANTS import SCREEN_WIDTH
 
 class LandWindow:
     def __init__(self, width=600, height=500):
         pygame.init()
         self.width = width
         self.height = height
-        self.screen = pygame.display.set_mode([500, 500])
+        self.screen = pygame.display.set_mode([SCREEN_WIDTH, 500])
         self.all_sprites = pygame.sprite.Group()
 
     def initialize_land(self):

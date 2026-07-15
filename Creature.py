@@ -1,6 +1,6 @@
 import pygame
 import random
-from screen import SCREEN_WIDTH
+from CONSTANTS import SCREEN_WIDTH
 
 class Creature(pygame.sprite.Sprite):
     def __init__(self, image, *groups):
