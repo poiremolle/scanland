@@ -1,5 +1,5 @@
 import pygame
-from imageprocessing import get_surface_image
+from imageprocessing import get_surface_image, remove_white_background
 
 class LandWindow:
     def __init__(self, width=600, height=500):
@@ -18,11 +18,12 @@ class LandWindow:
 
             self.screen.fill((230, 215, 255))
 
-            surfaceImage = get_surface_image('apple.jpg')
-
-            self.screen.blit(surfaceImage, (0, 0))
-
             pygame.display.flip()
 
         pygame.quit()
+
+    def show_img_on_screen(self, imgPath):
+        img = remove_white_background(imgPath)
+        surface = get_surface_image(img)
+        self.screen.blit(surface, (0, 0))
 
