@@ -4,12 +4,13 @@ from Creature import Creature
 from CONSTANTS import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class LandWindow:
-    def __init__(self, width=600, height=500):
+    def __init__(self, width=SCREEN_WIDTH, height=SCREEN_HEIGHT):
         pygame.init()
         self.width = width
         self.height = height
-        self.screen = pygame.display.set_mode([SCREEN_WIDTH, 500])
+        self.screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
         self.all_sprites = pygame.sprite.Group()
+        self.bg_img = pygame.image.load('background.png')
         self.cooldown = 45
 
     def initialize_land(self):
@@ -30,7 +31,8 @@ class LandWindow:
             if(current_time - last_update >= self.cooldown):
                 last_update = current_time
                 self.all_sprites.update()
-                self.screen.fill((230, 215, 255))
+                # self.screen.fill((230, 215, 255))
+                self.screen.blit(self.bg_img, self.bg_img.get_rect())
                 self.all_sprites.draw(self.screen)
 
                 pygame.display.flip()
