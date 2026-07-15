@@ -12,7 +12,6 @@ class LandWindow:
 
     def initialize_land(self):
         running = True
-        pygame.display.flip()
 
         while running:
             for event in pygame.event.get():
