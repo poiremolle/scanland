@@ -10,6 +10,7 @@ class LandWindow:
         self.height = height
         self.screen = pygame.display.set_mode([SCREEN_WIDTH, 500])
         self.all_sprites = pygame.sprite.Group()
+        self.cooldown = 500
 
     def initialize_land(self):
         running = True
@@ -17,16 +18,22 @@ class LandWindow:
             pygame.image.load("grump-dood.jpg"), 
             self.all_sprites
             )
+        
+        last_update = pygame.time.get_ticks()
 
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+            current_time = pygame.time.get_ticks()
 
-            self.all_sprites.update()
-            self.screen.fill((230, 215, 255))
-            self.all_sprites.draw(self.screen)
-            pygame.display.flip()
+            if(current_time - last_update >= self.cooldown):
+                last_update = current_time
+                self.all_sprites.update()
+                self.screen.fill((230, 215, 255))
+                self.all_sprites.draw(self.screen)
+                
+                pygame.display.flip()
 
 
         pygame.quit()
