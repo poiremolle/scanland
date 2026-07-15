@@ -8,8 +8,7 @@ from screen import initialize_land
 
 class MyEventHandler(FileSystemEventHandler):
      def on_created(self, event):
-        print(event)
-        if not event.is_directory: 
+        if event.src_path.endswith(".jpg"):
             path = event.src_path
             remove_white_background(path, 200)
      
