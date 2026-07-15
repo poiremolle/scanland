@@ -13,7 +13,7 @@ class MyEventHandler(FileSystemEventHandler):
      def on_created(self, event):
         if event.src_path.endswith(".jpg"):
             path = event.src_path
-            self.land.show_img_on_screen(path)
+            self.land.show_creature_on_screen(path)
 
      def on_deleted(self, event):
          print("Deleted.")
