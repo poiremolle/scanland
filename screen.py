@@ -1,5 +1,5 @@
 import pygame
-from imageprocessing import get_surface_image, remove_white_background
+from imageprocessing import get_surface, remove_white_background
 
 class LandWindow:
     def __init__(self, width=600, height=500):
