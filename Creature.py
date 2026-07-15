@@ -18,6 +18,9 @@ class Creature(pygame.sprite.Sprite):
     def update(self):
         if(self.rect.x > SCREEN_WIDTH):
             self.rect.x = -self.rect.w
+            self.rect.y = random.choice(
+            range(0, SCREEN_HEIGHT - int(SCREEN_HEIGHT * 0.2), 20)
+            )
             return
         
         self.rect.x += self.speed
