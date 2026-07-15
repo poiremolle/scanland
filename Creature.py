@@ -15,7 +15,7 @@ class Creature(pygame.sprite.Sprite):
 
     def update(self):
         if(self.rect.x > SCREEN_WIDTH):
-            self.rect.x = 0
+            self.rect.x = -self.rect.w
             return
         self.rect.x += self.speed
 
