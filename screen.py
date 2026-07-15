@@ -1,5 +1,6 @@
 import pygame
 from imageprocessing import get_surface, remove_white_background
+from Creature import Creature
 
 class LandWindow:
     def __init__(self, width=600, height=500):
@@ -29,7 +30,9 @@ class LandWindow:
     def show_img_on_screen(self, imgPath):
         img = remove_white_background(imgPath)
         surface = get_surface(img)
-        # Create sprite here 
+
+        new_sprite = Creature(surface, self.all_sprites)
+   
         # self.screen.blit(surface, (0, 0))
-        pygame.display.flip()
+        # pygame.display.flip()
 
