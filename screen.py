@@ -1,7 +1,7 @@
 import pygame
 from imageprocessing import get_surface, remove_white_background
 from Creature import Creature
-from CONSTANTS import SCREEN_WIDTH
+from CONSTANTS import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class LandWindow:
     def __init__(self, width=600, height=500):
@@ -32,7 +32,7 @@ class LandWindow:
                 self.all_sprites.update()
                 self.screen.fill((230, 215, 255))
                 self.all_sprites.draw(self.screen)
-                
+
                 pygame.display.flip()
 
 
@@ -40,9 +40,10 @@ class LandWindow:
 
     def show_img_on_screen(self, imgPath):
         img = remove_white_background(imgPath)
+        img.thumbnail((SCREEN_WIDTH * 0.25, SCREEN_HEIGHT))
         surface = get_surface(img)
 
-        new_sprite = Creature(surface, self.all_sprites)
+        Creature(surface, self.all_sprites)
    
         # self.screen.blit(surface, (0, 0))
         # pygame.display.flip()
