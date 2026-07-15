@@ -18,12 +18,6 @@ def remove_white_background(image_path, threshold=240):
     img.putdata(new_data)
     return img
 
-def show_image_on_background(background_path, img):
-    background = Image.open(background_path)
-    background.paste(img)
-    background.show()
-
-
 def pil_to_surface(pilImgage):
     return pygame.image.fromstring(
         pilImgage.tobytes(), pilImgage.size, pilImgage.mode
