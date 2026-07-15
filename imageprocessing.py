@@ -4,6 +4,7 @@ import pygame
 
 
 def remove_white_background(image_path, threshold=240):
+    print(f"Path to image to be made transparent: {image_path}")
     img = Image.open(image_path)
     img = img.convert("RGBA")
 
@@ -29,7 +30,6 @@ def pil_to_surface(pilImgage):
     ).convert_alpha()
 
 
-def get_surface_image(imagePath):
-    pilImage = remove_white_background(imagePath)
+def get_surface(pilImage):
     return pil_to_surface(pilImage)
 
