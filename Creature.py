@@ -13,7 +13,7 @@ class Creature(pygame.sprite.Sprite):
             )
         self.speed = random.choice(range(1,8))
         self.bounce_height = [1, 3, 6, 12, -12, -6, -3, -1]
-        self.frame = 0
+        self.bounce_frame = 0
 
     def update(self):
         if(self.rect.x > SCREEN_WIDTH):
@@ -25,10 +25,10 @@ class Creature(pygame.sprite.Sprite):
         
         self.rect.x += self.speed
 
-        if(self.frame >= len(self.bounce_height)):
-            self.frame = 0
+        if(self.bounce_frame >= len(self.bounce_height)):
+            self.bounce_frame = 0
 
-        self.rect.y += self.bounce_height[self.frame]
-        self.frame += 1
+        self.rect.y += self.bounce_height[self.bounce_frame]
+        self.bounce_frame += 1
 
         
