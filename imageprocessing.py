@@ -3,7 +3,7 @@ from PIL import Image
 import pygame
 
 
-def remove_white_background(image_path, threshold=240):
+def remove_white_background(image_path, threshold=220):
     print(f"Path to image to be made transparent: {image_path}")
     img = Image.open(image_path)
     img = img.convert("RGBA")
