@@ -2,6 +2,8 @@ import pygame
 from imageprocessing import get_surface, remove_white_background
 from Creature import Creature
 
+SCREEN_WIDTH = 500
+
 class LandWindow:
     def __init__(self, width=600, height=500):
         pygame.init()
