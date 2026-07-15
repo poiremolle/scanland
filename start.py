@@ -4,14 +4,17 @@ from watchdog.events import FileSystemEvent, FileSystemEventHandler
 from watchdog.observers import Observer
 
 from imageprocessing import remove_white_background
-from screen import initialize_land
+from screen import LandWindow
 
 class MyEventHandler(FileSystemEventHandler):
+     def __init__(self):
+         self.land = LandWindow()
+
      def on_created(self, event):
         if event.src_path.endswith(".jpg"):
             path = event.src_path
-            remove_white_background(path, 200)
-     
+            self.land.show_img_on_screen(path)
+
      def on_deleted(self, event):
          print("Deleted.")
      
@@ -26,7 +29,8 @@ def start_program():
     print("Observation started. Press CTRL+C to stop.")
 
     try:
-        initialize_land()
+       print("Code to be written")
+
     except KeyboardInterrupt:
         print("Keyboard interrupt received. Shutting down...")
     finally:
