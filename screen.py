@@ -15,11 +15,6 @@ class LandWindow:
 
     def initialize_land(self):
         running = True
-        test_sprite = Creature(
-            pygame.image.load("grump-dood.jpg"), 
-            self.all_sprites
-            )
-        
         last_update = pygame.time.get_ticks()
 
         while running:
@@ -31,7 +26,6 @@ class LandWindow:
             if(current_time - last_update >= self.cooldown):
                 last_update = current_time
                 self.all_sprites.update()
-                # self.screen.fill((230, 215, 255))
                 self.screen.blit(self.bg_img, self.bg_img.get_rect())
                 self.all_sprites.draw(self.screen)
 
