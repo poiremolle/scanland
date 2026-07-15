@@ -6,6 +6,8 @@ class Creature(pygame.sprite.Sprite):
         super().__init__(*groups)
         self.image = image
         self.rect = self.image.get_rect()
+        self.rect.x = 0
+        self.rect.y = 0
         self.speed = random.choice(range(2,5))
 
     def update(self):
