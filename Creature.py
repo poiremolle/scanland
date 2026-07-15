@@ -17,24 +17,36 @@ class Creature(pygame.sprite.Sprite):
         self.speed = random.choice(range(1,8))
         self.bounce_offsets = [1, 3, 6, 12, -12, -6, -3, -1]
         self.bounce_frame = 0
-        self.update_scale()
-        self.reset_position()
+        self.reset()
         
 
     def off_screen(self):
         return self.rect.x > SCREEN_WIDTH  
+    
+    def reset(self):
+        new_y = self.generate_random_y()
+        self.update_scale(new_y)
+        self.update_position(new_y)
 
-    def reset_position(self):
-        self.rect.x = -self.rect.w
-        self.rect.y = random.randrange(
-                MIN_Y, SCREEN_HEIGHT * MAX_Y_SCALE, Y_STEP  
-            )
-        print(f"y: {self.rect.y}")
+    def generate_random_y(self):
+        return random.randrange(
+            MIN_Y, SCREEN_HEIGHT * MAX_Y_SCALE, Y_STEP  
+        )
         
-    def update_scale(self):
-        depth_scale = max(MIN_Y, self.rect.y) / SCREEN_HEIGHT
-        print(f"depth scale: {depth_scale}")
-        self.image = pygame.transform.scale_by(self.original_image, depth_scale)
+    def update_scale(self, new_y):
+        print(f"current w: {self.rect.w}")
+        depth_scale = max(MIN_Y, new_y) / SCREEN_HEIGHT
+        self.image = pygame.transform.scale_by(
+            self.original_image, depth_scale
+            )
+        self.rect = self.image.get_rect()
+      
+        print(f"new y: {new_y}, scaled by: {depth_scale}, new w: {self.rect.w}")
+
+    def update_position(self, new_y):
+        self.rect.x = -self.rect.w
+        print(f"new x: {self.rect.x}")
+        self.rect.y = new_y
 
     def animate_bounce(self):
         self.rect.x += self.speed
@@ -44,7 +56,7 @@ class Creature(pygame.sprite.Sprite):
 
     def update(self):
         if self.off_screen():
-            self.update_scale()
-            self.reset_position()
+            print(f"is off screen, x: {self.rect.x}")
+            self.reset()
            
         self.animate_bounce()
