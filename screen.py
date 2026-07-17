@@ -1,5 +1,4 @@
 import pygame
-from imageprocessing import get_surface, remove_white_background
 from Creature import Creature
 from CONSTANTS import SCREEN_WIDTH, SCREEN_HEIGHT
 

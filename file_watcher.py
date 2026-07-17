@@ -1,10 +1,6 @@
 from watchdog.events import FileSystemEventHandler
 from Creature import Creature
 from screen import LandWindow
-#from watchdog.observers import Observer
-
-#from imageprocessing import remove_white_background
-#from screen import LandWindow
 
 class MyEventHandler(FileSystemEventHandler):
      def __init__(self, land : LandWindow):
