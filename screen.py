@@ -9,7 +9,7 @@ class LandWindow:
         self.height = height
         self.screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
         self.all_sprites = pygame.sprite.Group()
-        self.bg_img = pygame.image.load('background.png')
+        self.bg_img = pygame.image.load('assets/fixed/background.png')
         self.cooldown = 45
 
     def initialize_land(self):
