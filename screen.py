@@ -34,11 +34,6 @@ class LandWindow:
 
         pygame.quit()
 
-    def show_creature(self, scanned_img_path):
-        pil_image = remove_white_background(scanned_img_path)
-        # pil_image.thumbnail((SCREEN_WIDTH * 0.25, SCREEN_HEIGHT))
-
-        surface = get_surface(pil_image)
-
-        Creature(surface, self.all_sprites)
+    def add_creature_from_file(self, path):
+        Creature.from_file(path, self.all_sprites)
 
