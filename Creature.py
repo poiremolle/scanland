@@ -15,6 +15,7 @@ class Creature(pygame.sprite.Sprite):
         super().__init__(*groups)
         self.image = image
         self.rect = self.image.get_rect()
+        self.rect.x = -self.rect.w
         self.original_image = image
         self.speed = random.choice(range(1,8))
         self.bounce_offsets = [1, 3, 6, 12, -12, -6, -3, -1]

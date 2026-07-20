@@ -8,7 +8,7 @@ class MyEventHandler(FileSystemEventHandler):
 
      def on_created(self, event):
         if event.src_path.endswith(".jpg"):
-            self.land.add_creature_from_file(event.src_path)
+            self.land.queue_creature(event.src_path)
 
      def on_deleted(self, event):
          print("Deleted.")

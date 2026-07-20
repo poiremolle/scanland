@@ -1,6 +1,7 @@
 import pygame
 from Creature import Creature
 from CONSTANTS import SCREEN_WIDTH, SCREEN_HEIGHT
+from queue import Queue
 
 class LandWindow:
     def __init__(self, width=SCREEN_WIDTH, height=SCREEN_HEIGHT):
@@ -8,7 +9,7 @@ class LandWindow:
         self.width = width
         self.height = height
         self.screen = pygame.display.set_mode([width, height])
-        self.queue = Queue()
+        self.pending_creatures = Queue()
         self.all_sprites = pygame.sprite.Group()
         self.bg_img = pygame.image.load('assets/fixed/background.png')
         self.cooldown = 45
@@ -23,6 +24,8 @@ class LandWindow:
                     running = False
             current_time = pygame.time.get_ticks()
 
+            self.process_pending_creatures()
+
             if(current_time - last_update >= self.cooldown):
                 last_update = current_time
                 self.all_sprites.update()
@@ -31,9 +34,16 @@ class LandWindow:
 
                 pygame.display.flip()
 
-
         pygame.quit()
 
+    def queue_creature(self, path):
+        self.pending_creatures.put(path)
+
+    def process_pending_creatures(self):
+        while not self.pending_creatures.empty():
+            path = self.pending_creatures.get()
+            self.add_creature_from_file(path)
+    
     def add_creature_from_file(self, path):
         Creature.from_file(path, self.all_sprites)
 
