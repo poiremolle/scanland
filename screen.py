@@ -22,10 +22,10 @@ class LandWindow:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+
+            self.show_pending_creature()
+
             current_time = pygame.time.get_ticks()
-
-            self.process_pending_creatures()
-
             if(current_time - last_update >= self.cooldown):
                 last_update = current_time
                 self.all_sprites.update()
@@ -39,8 +39,8 @@ class LandWindow:
     def queue_creature(self, path):
         self.pending_creatures.put(path)
 
-    def process_pending_creatures(self):
-        while not self.pending_creatures.empty():
+    def show_pending_creature(self):
+        if not self.pending_creatures.empty():
             path = self.pending_creatures.get()
             self.add_creature_from_file(path)
     

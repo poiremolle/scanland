@@ -1,12 +1,16 @@
+from queue import Queue
 from screen import LandWindow
 from imageprocessing import ImageProcessor
 from file_watcher import MyEventHandler
 from watchdog.observers import Observer
-from screen import LandWindow
 from pathlib import Path
 
-land = LandWindow()
-event_handler = MyEventHandler(land)
+image_paths = Queue()
+processed_images = Queue()
+
+land = LandWindow(processed_images)
+image_processor = ImageProcessor(image_paths, processed_images)
+event_handler = MyEventHandler(image_paths)
 
 observer = Observer()
 observer.schedule(event_handler, ".", recursive=True)

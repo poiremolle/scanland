@@ -1,14 +1,13 @@
 from watchdog.events import FileSystemEventHandler
-from Creature import Creature
-from screen import LandWindow
+from queue import Queue
 
 class MyEventHandler(FileSystemEventHandler):
-     def __init__(self, land : LandWindow):
-        self.land = land
+     def __init__(self, image_paths: Queue):
+        self.image_paths = image_paths
 
      def on_created(self, event):
         if event.src_path.endswith(".jpg"):
-            self.land.queue_creature(event.src_path)
+            self.image_paths.put(event.src_path)
 
      def on_deleted(self, event):
          print("Deleted.")
