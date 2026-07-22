@@ -1,3 +1,5 @@
+from screen import LandWindow
+from imageprocessing import ImageProcessor
 from file_watcher import MyEventHandler
 from watchdog.observers import Observer
 from screen import LandWindow
