@@ -27,6 +27,8 @@ try:
 except KeyboardInterrupt:
     print("Keyboard interrupt received. Shutting down...")
 finally:
+    print("Shutting down image processor.")
+    image_processor.stop()
     print("Stopping observation.")
     observer.stop()
     observer.join()
