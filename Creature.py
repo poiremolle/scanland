@@ -1,7 +1,6 @@
 import pygame
 import random
 
-from imageprocessing import remove_white_background, get_surface
 from CONSTANTS import (
     SCREEN_WIDTH, 
     SCREEN_HEIGHT, 
