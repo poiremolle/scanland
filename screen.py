@@ -9,7 +9,7 @@ class LandWindow:
         self.width = width
         self.height = height
         self.screen = pygame.display.set_mode([width, height])
-        self.pending_creatures = Queue()
+        self.creature_surfaces = processed_images
         self.all_sprites = pygame.sprite.Group()
         self.bg_img = pygame.image.load('assets/fixed/background.png')
         self.cooldown = 45
