@@ -7,7 +7,7 @@ import pygame
 from Creature import Creature 
 
 class ImageProcessor:
-    def __init__(self, input_queue, output_queue: Queue):
+    def __init__(self, input_queue: Queue, output_queue: Queue):
         self.input_queue = input_queue
         self.output_queue = output_queue
         self.working_thread = Thread(target=self.run)
