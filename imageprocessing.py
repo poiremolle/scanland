@@ -1,10 +1,8 @@
 # If I don't need the original image, could modifying in place save some ressources?
 from threading import Thread
 from queue import Queue
-from screen import LandWindow
 from PIL import Image
 import pygame
-from Creature import Creature 
 
 class ImageProcessor:
     def __init__(self, input_queue: Queue, output_queue: Queue):
@@ -14,17 +12,27 @@ class ImageProcessor:
         self.processing_thread.start()
 
     def run(self):
-        while not self.input_queue.empty():
+        while True:
             path = self.input_queue.get()
-            transparent_image = self.remove_white_background(path)
-            surface_from_image = self.get_surface(transparent_image)
-            self.land.queue_creature(surface_from_image)
+
+            if path is None:
+                break
+
+            self.queue_image(self.process_image(path))
+
+    def stop(self):
+        self.input_queue.put(None)
+        self.processing_thread.join()
+      
+    def process_image(self, path):
+        transparent_image = self.remove_white_background(path)
+        return self.get_surface(transparent_image)
+    
+    def queue_image(self, surface):
+        self.output_queue.put(surface)
 
     def remove_white_background(self, image_path, threshold=220):
-        print(f"Path to image to be made transparent: {image_path}")
-
         img = Image.open(image_path)
-
         return self.make_white_pixels_transparent(img, threshold)
 
     def make_white_pixels_transparent(self, img, threshold):
@@ -50,4 +58,3 @@ class ImageProcessor:
 
     def get_surface(self, pilImage):
         return self.pil_to_surface(pilImage)
-
