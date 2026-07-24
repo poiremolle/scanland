@@ -4,7 +4,7 @@ from CONSTANTS import SCREEN_WIDTH, SCREEN_HEIGHT
 from queue import Queue
 
 class LandWindow:
-    def __init__(self, width=SCREEN_WIDTH, height=SCREEN_HEIGHT):
+    def __init__(self, processed_images: Queue, width=SCREEN_WIDTH, height=SCREEN_HEIGHT):
         pygame.init()
         self.width = width
         self.height = height
