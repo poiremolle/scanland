@@ -38,18 +38,14 @@ class Creature(pygame.sprite.Sprite):
         )
         
     def update_scale(self, new_y):
-        print(f"current w: {self.rect.w}")
         depth_scale = max(MIN_Y, new_y) / SCREEN_HEIGHT
         self.image = pygame.transform.scale_by(
             self.original_image, depth_scale
             )
         self.rect = self.image.get_rect()
-      
-        print(f"new y: {new_y}, scaled by: {depth_scale}, new w: {self.rect.w}")
 
     def update_position(self, new_y):
         self.rect.x = -self.rect.w
-        print(f"new x: {self.rect.x}")
         self.rect.y = new_y
 
     def animate_bounce(self):
