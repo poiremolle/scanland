@@ -19,12 +19,10 @@ class Creature(pygame.sprite.Sprite):
         self.speed = random.choice(range(1,8))
         self.bounce_offsets = [1, 3, 6, 12, -12, -6, -3, -1]
         self.bounce_frame = 0
-        self.reset()
-    
-    def from_file(img_path, creature_group):
-        pil_image = remove_white_background(img_path)
-        surface = get_surface(pil_image)
-        Creature(surface, creature_group)        
+        self.reset()  
+
+    def from_surface(surface, creature_group):
+        Creature(surface, creature_group)    
 
     def off_screen(self):
         return self.rect.x > SCREEN_WIDTH  
