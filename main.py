@@ -1,6 +1,6 @@
 from queue import Queue
-from screen import LandWindow
-from imageprocessing import ImageProcessor
+from window import DisplayWindow
+from image_processor import ImageProcessor
 from file_watcher import MyEventHandler
 from watchdog.observers import Observer
 from pathlib import Path
@@ -8,7 +8,7 @@ from pathlib import Path
 image_paths = Queue()
 processed_images = Queue()
 
-land = LandWindow(processed_images)
+window = DisplayWindow(processed_images)
 image_processor = ImageProcessor(image_paths, processed_images)
 event_handler = MyEventHandler(image_paths)
 
@@ -23,7 +23,7 @@ Path("assets/creature_images").mkdir(
 )
 
 try:
-    land.initialize_land()
+    window.initialize()
 except KeyboardInterrupt:
     print("Keyboard interrupt received. Shutting down...")
 finally:

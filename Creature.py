@@ -1,7 +1,7 @@
 import pygame
 import random
 
-from CONSTANTS import (
+from constants import (
     SCREEN_WIDTH, 
     SCREEN_HEIGHT, 
     MAX_Y_SCALE, 
