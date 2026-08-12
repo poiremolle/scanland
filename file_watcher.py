@@ -20,5 +20,5 @@ class MyEventHandler(FileSystemEventHandler):
     def on_moved(self, event):
          print("Moved.")
 
-    def is_image_suffix(path):
+    def is_image_suffix(self, path):
         return Path(path).suffix.lower() in IMAGE_SUFFIXES
