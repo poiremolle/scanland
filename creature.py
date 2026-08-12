@@ -19,10 +19,11 @@ class Creature(pygame.sprite.Sprite):
         self.speed = random.choice(range(1,8))
         self.bounce_offsets = [1, 3, 6, 12, -12, -6, -3, -1]
         self.bounce_frame = 0
+        self.flagged_for_despawn = False
         self.reset()  
 
     def from_surface(surface, creature_group):
-        Creature(surface, creature_group)    
+        return Creature(surface, creature_group)    
 
     def off_screen(self):
         return self.rect.x > SCREEN_WIDTH  
@@ -56,7 +57,16 @@ class Creature(pygame.sprite.Sprite):
 
     def update(self):
         if self.off_screen():
-            print(f"is off screen, x: {self.rect.x}")
+            if self.flagged_for_despawn:
+                self.remove_from_screen()
+                return
+  
             self.reset()
            
         self.animate_bounce()
+
+    def flag_for_despawn(self):
+        self.flagged_for_despawn = True
+
+    def remove_from_screen(self):
+        self.kill()
