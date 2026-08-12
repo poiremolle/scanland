@@ -12,7 +12,7 @@ class DisplayWindow:
         self.creature_surfaces = processed_images
         self.all_sprites = pygame.sprite.Group()
         self.deletion_schedule = Queue()
-        self.bg_img = pygame.image.load('assets/fixed/background.png')
+        self.bg_img = pygame.image.load('assets/fixed/background.jpg')
         self.cooldown = 45
 
     def initialize(self):
