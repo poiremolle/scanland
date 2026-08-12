@@ -4,3 +4,9 @@ MAX_Y_SCALE = 0.8
 MIN_Y = 100
 Y_STEP = 20
 MAX_SPRITE_COUNT = 1
+
+IMAGE_SUFFIXES = {
+    ".jpg",
+    ".jpeg",
+    ".png",
+}
