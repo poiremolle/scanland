@@ -1,6 +1,6 @@
 import pygame
 from creature import Creature
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT, MAX_SPRITE_COUNT
 from queue import Queue
 
 class DisplayWindow:
@@ -11,6 +11,7 @@ class DisplayWindow:
         self.screen = pygame.display.set_mode([width, height])
         self.creature_surfaces = processed_images
         self.all_sprites = pygame.sprite.Group()
+        self.deletion_schedule = Queue()
         self.bg_img = pygame.image.load('assets/fixed/background.png')
         self.cooldown = 45
 
@@ -42,5 +43,9 @@ class DisplayWindow:
         self.create_creature_from_surface(surface)
 
     def create_creature_from_surface(self, surface):
-        Creature.from_surface(surface, self.all_sprites)
+        if self.deletion_schedule.qsize() > MAX_SPRITE_COUNT:
+            self.deletion_schedule.get().flag_for_despawn()
+
+        new = Creature.from_surface(surface, self.all_sprites)
+        self.deletion_schedule.put(new)
 
