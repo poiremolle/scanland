@@ -1,3 +1,7 @@
+# I encountered this idea at Hello Ada's tech festival for kids in the spring of 2025. 
+# Guldastronaut had set up a virtual aquarium in the festival lobby and I had so
+# much fun with it I wanted to make a similar one to take home.
+
 from queue import Queue
 from window import DisplayWindow
 from image_processor import ImageProcessor
