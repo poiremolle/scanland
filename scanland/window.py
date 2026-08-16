@@ -12,7 +12,7 @@ class DisplayWindow:
         self.creature_data = processed_images
         self.all_sprites = pygame.sprite.Group()
         self.deletion_schedule = Queue()
-        self.bg_img = pygame.image.load('scanland/assets/fixed/background.jpg')
+        self.bg_img = pygame.image.load('assets/fixed/background.jpg')
         self.cooldown = 45
 
     def initialize(self):
@@ -45,7 +45,7 @@ class DisplayWindow:
     def create_surface_from_data(self):
         data = self.creature_data.get()
         return pygame.image.fromstring(
-            data[0].tobytes(), data[1], data[2]
+            data[0], data[1], data[2]
         ).convert_alpha()
 
     def create_creature_from_surface(self, surface):
