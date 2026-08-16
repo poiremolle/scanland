@@ -18,7 +18,7 @@ class ImageProcessor:
             if path is None:
                 break
 
-            self.queue_image(self.process_image(path))
+            self.output_queue.put(self.process_image(path))
 
     def stop(self):
         self.input_queue.put(None)
