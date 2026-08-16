@@ -18,7 +18,7 @@ class ImageProcessor:
             if path is None:
                 break
 
-            self.output_queue.put(self.process_image(path))
+            self.queue_image(self.process_image(path))
 
     def stop(self):
         self.input_queue.put(None)
@@ -26,7 +26,8 @@ class ImageProcessor:
       
     def process_image(self, path):
         transparent_image = self.remove_white_background(path)
-        return self.get_surface(transparent_image)
+        return self.pil_to_tuple(transparent_image)
+        #return self.get_surface(transparent_image)
     
     def queue_image(self, surface):
         self.output_queue.put(surface)
@@ -54,7 +55,9 @@ class ImageProcessor:
         return pygame.image.fromstring(
             pilImgage.tobytes(), pilImgage.size, pilImgage.mode
         ).convert_alpha()
-
+    
+    def pil_to_tuple(self, pilImage):
+        return (pilImage.toBytes(), pilImage.size, pilImage.mode)
 
     def get_surface(self, pilImage):
         return self.pil_to_surface(pilImage)
