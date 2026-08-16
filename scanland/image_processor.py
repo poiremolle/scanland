@@ -18,7 +18,7 @@ class ImageProcessor:
             if path is None:
                 break
 
-            self.queue_image(self.process_image(path))
+            self.output_queue.put(self.process_image(path))
 
     def stop(self):
         self.input_queue.put(None)
@@ -29,8 +29,8 @@ class ImageProcessor:
         return self.pil_to_tuple(transparent_image)
         #return self.get_surface(transparent_image)
     
-    def queue_image(self, surface):
-        self.output_queue.put(surface)
+    # def queue_image(self, surface):
+    #     self.output_queue.put(surface)
 
     def remove_white_background(self, image_path, threshold=220):
         img = Image.open(image_path)
