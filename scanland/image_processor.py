@@ -57,7 +57,7 @@ class ImageProcessor:
         ).convert_alpha()
     
     def pil_to_tuple(self, pilImage):
-        return (pilImage.toBytes(), pilImage.size, pilImage.mode)
+        return (pilImage.tobytes(), pilImage.size, pilImage.mode)
 
     def get_surface(self, pilImage):
         return self.pil_to_surface(pilImage)
