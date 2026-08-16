@@ -39,7 +39,7 @@ class DisplayWindow:
         pygame.quit()
 
     def show_pending_creature(self):
-        surface = self.creature_data.get()
+        surface = self.create_surface_from_data()
         self.create_creature_from_surface(surface)
 
     def create_surface_from_data(self):
