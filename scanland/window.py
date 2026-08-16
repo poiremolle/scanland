@@ -42,6 +42,12 @@ class DisplayWindow:
         surface = self.creature_data.get()
         self.create_creature_from_surface(surface)
 
+    def create_surface_from_data(self):
+        data = self.creature_data.get()
+        return pygame.image.fromstring(
+            data[0].tobytes(), data[1], data[2]
+        ).convert_alpha()
+
     def create_creature_from_surface(self, surface):
         if self.deletion_schedule.qsize() > MAX_SPRITE_COUNT:
             self.deletion_schedule.get().flag_for_despawn()
