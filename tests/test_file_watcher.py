@@ -16,3 +16,7 @@ def test_is_image_suffix_true(file_watcher):
     assert file_watcher.is_image_suffix("test.jpeg") == True
     assert file_watcher.is_image_suffix("test.JPEG") == True
 
+def test_is_image_suffix_false(file_watcher):
+    assert file_watcher.is_image_suffix("test.BMP") == False
+    assert file_watcher.is_image_suffix("test") == False
+
