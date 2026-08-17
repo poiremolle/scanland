@@ -1,7 +1,6 @@
 import pytest
 from queue import Queue
 from scanland.file_watcher import MyEventHandler
-from PIL import Image
 
 @pytest.fixture
 def file_watcher():
