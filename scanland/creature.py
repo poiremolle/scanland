@@ -24,10 +24,26 @@ class Creature(pygame.sprite.Sprite):
         self.flagged_for_despawn = False
 
     def from_surface(surface, creature_group):
-        return Creature(surface, creature_group)    
+        return Creature(surface, creature_group)
+    
+    def flag_for_despawn(self):
+        self.flagged_for_despawn = True
 
+    def update(self):
+        if self.off_screen():
+            if self.flagged_for_despawn:
+                self.remove_from_screen()
+                return
+  
+            self.reset()
+           
+        self.animate_bounce()
+    
     def off_screen(self):
         return self.rect.x > SCREEN_WIDTH  
+
+    def remove_from_screen(self):
+        self.kill()
     
     def reset(self):
         new_y = self.generate_random_y()
@@ -40,38 +56,22 @@ class Creature(pygame.sprite.Sprite):
         return random.randrange(
             MIN_Y, int(SCREEN_HEIGHT * MAX_Y_SCALE), Y_STEP  
         )
-        
+
+    def calculate_scale_from_y(self, y):
+        return max(MIN_Y, y) / SCREEN_HEIGHT
+
     def update_scale_from_original(self, scale):
         self.image = pygame.transform.scale_by(
             self.original_image, scale
         )
         self.rect = self.image.get_rect()
 
-    def calculate_scale_from_y(self, y):
-        return max(MIN_Y, y) / SCREEN_HEIGHT
-
     def update_position(self, new_x, new_y):
         self.rect.x = new_x
         self.rect.y = new_y
-
+        
     def animate_bounce(self):
         self.rect.x += self.speed
 
         self.bounce_frame = (self.bounce_frame + 1) % len(self.bounce_offsets)
-        self.rect.y += self.bounce_offsets[self.bounce_frame]
-
-    def update(self):
-        if self.off_screen():
-            if self.flagged_for_despawn:
-                self.remove_from_screen()
-                return
-  
-            self.reset()
-           
-        self.animate_bounce()
-
-    def flag_for_despawn(self):
-        self.flagged_for_despawn = True
-
-    def remove_from_screen(self):
-        self.kill()
+        self.rect.y += self.bounce_offsets[self.bounce_frame]    
