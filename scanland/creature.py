@@ -1,7 +1,7 @@
 import pygame
 import random
 
-from constants import (
+from scanland.constants import (
     SCREEN_WIDTH, 
     SCREEN_HEIGHT, 
     MAX_Y_SCALE, 

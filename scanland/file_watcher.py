@@ -1,7 +1,7 @@
 from watchdog.events import FileSystemEventHandler
 from queue import Queue
 from pathlib import Path
-from constants import IMAGE_SUFFIXES
+from scanland.constants import IMAGE_SUFFIXES
 
 class MyEventHandler(FileSystemEventHandler):
     def __init__(self, image_paths: Queue):

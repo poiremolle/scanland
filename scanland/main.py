@@ -3,13 +3,13 @@
 # much fun with it I wanted to make a similar one to take home.
 
 from queue import Queue
-from window import DisplayWindow
-from image_processor import ImageProcessor
-from file_watcher import MyEventHandler
+from scanland.window import DisplayWindow
+from scanland.image_processor import ImageProcessor
+from scanland.file_watcher import MyEventHandler
 from watchdog.observers import Observer
 from pathlib import Path
 
-creature_drawings_path = "assets/creature_images"
+creature_drawings_path = "scanland/assets/creature_images"
 
 Path(creature_drawings_path).mkdir(
     parents=True,

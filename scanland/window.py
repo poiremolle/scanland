@@ -1,6 +1,6 @@
 import pygame
-from creature import Creature
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT, MAX_SPRITE_COUNT
+from scanland.creature import Creature
+from scanland.constants import SCREEN_WIDTH, SCREEN_HEIGHT, MAX_SPRITE_COUNT
 from queue import Queue
 
 class DisplayWindow:
@@ -12,7 +12,7 @@ class DisplayWindow:
         self.creature_data = processed_images
         self.all_sprites = pygame.sprite.Group()
         self.deletion_schedule = Queue()
-        self.bg_img = pygame.image.load('assets/fixed/background.jpg')
+        self.bg_img = pygame.image.load('scanland/assets/fixed/background.jpg')
         self.cooldown = 45
 
     def initialize(self):
