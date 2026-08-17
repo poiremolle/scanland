@@ -31,7 +31,7 @@ class Creature(pygame.sprite.Sprite):
     def reset(self):
         new_y = self.generate_random_y()
         self.update_scale(new_y)
-        self.update_position(new_y)
+        self.update_position(-self.rect.w, new_y)
 
     def generate_random_y(self):
         return random.randrange(
