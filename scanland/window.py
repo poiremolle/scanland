@@ -1,6 +1,6 @@
 import pygame
-from creature import Creature
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT, MAX_SPRITE_COUNT
+from scanland.creature import Creature
+from scanland.constants import SCREEN_WIDTH, SCREEN_HEIGHT, MAX_SPRITE_COUNT
 from queue import Queue
 
 class DisplayWindow:
@@ -9,10 +9,10 @@ class DisplayWindow:
         self.width = width
         self.height = height
         self.screen = pygame.display.set_mode([width, height])
-        self.creature_surfaces = processed_images
+        self.creature_data = processed_images
         self.all_sprites = pygame.sprite.Group()
         self.deletion_schedule = Queue()
-        self.bg_img = pygame.image.load('assets/fixed/background.jpg')
+        self.bg_img = pygame.image.load('scanland/assets/fixed/background.jpg')
         self.cooldown = 45
 
     def initialize(self):
@@ -24,7 +24,7 @@ class DisplayWindow:
                 if event.type == pygame.QUIT:
                     running = False
 
-            if not self.creature_surfaces.empty():
+            if not self.creature_data.empty():
                 self.show_pending_creature()
 
             current_time = pygame.time.get_ticks()
@@ -39,8 +39,14 @@ class DisplayWindow:
         pygame.quit()
 
     def show_pending_creature(self):
-        surface = self.creature_surfaces.get()
+        surface = self.create_surface_from_data()
         self.create_creature_from_surface(surface)
+
+    def create_surface_from_data(self):
+        data = self.creature_data.get()
+        return pygame.image.fromstring(
+            data[0], data[1], data[2]
+        ).convert_alpha()
 
     def create_creature_from_surface(self, surface):
         if self.deletion_schedule.qsize() > MAX_SPRITE_COUNT:

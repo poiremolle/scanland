@@ -2,3 +2,4 @@ __pycache__/
 .vscode/
 .DS_Store
 scanland/assets/creature_images/
+.pytest_cache/

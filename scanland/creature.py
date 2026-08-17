@@ -1,7 +1,7 @@
 import pygame
 import random
 
-from constants import (
+from scanland.constants import (
     SCREEN_WIDTH, 
     SCREEN_HEIGHT, 
     MAX_Y_SCALE, 
@@ -31,11 +31,11 @@ class Creature(pygame.sprite.Sprite):
     def reset(self):
         new_y = self.generate_random_y()
         self.update_scale(new_y)
-        self.update_position(new_y)
+        self.update_position(-self.rect.w, new_y)
 
     def generate_random_y(self):
         return random.randrange(
-            MIN_Y, SCREEN_HEIGHT * MAX_Y_SCALE, Y_STEP  
+            MIN_Y, int(SCREEN_HEIGHT * MAX_Y_SCALE), Y_STEP  
         )
         
     def update_scale(self, new_y):
@@ -45,8 +45,8 @@ class Creature(pygame.sprite.Sprite):
             )
         self.rect = self.image.get_rect()
 
-    def update_position(self, new_y):
-        self.rect.x = -self.rect.w
+    def update_position(self, new_x, new_y):
+        self.rect.x = new_x
         self.rect.y = new_y
 
     def animate_bounce(self):

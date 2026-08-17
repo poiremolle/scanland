@@ -2,7 +2,6 @@
 from threading import Thread
 from queue import Queue
 from PIL import Image
-import pygame
 
 class ImageProcessor:
     def __init__(self, input_queue: Queue, output_queue: Queue):
@@ -18,7 +17,7 @@ class ImageProcessor:
             if path is None:
                 break
 
-            self.queue_image(self.process_image(path))
+            self.output_queue.put(self.process_image(path))
 
     def stop(self):
         self.input_queue.put(None)
@@ -26,10 +25,7 @@ class ImageProcessor:
       
     def process_image(self, path):
         transparent_image = self.remove_white_background(path)
-        return self.get_surface(transparent_image)
-    
-    def queue_image(self, surface):
-        self.output_queue.put(surface)
+        return self.pil_to_tuple(transparent_image)
 
     def remove_white_background(self, image_path, threshold=220):
         img = Image.open(image_path)
@@ -48,13 +44,6 @@ class ImageProcessor:
         img.putdata(new_data)
 
         return img
-
-
-    def pil_to_surface(self, pilImgage):
-        return pygame.image.fromstring(
-            pilImgage.tobytes(), pilImgage.size, pilImgage.mode
-        ).convert_alpha()
-
-
-    def get_surface(self, pilImage):
-        return self.pil_to_surface(pilImage)
+    
+    def pil_to_tuple(self, pilImage):
+        return (pilImage.tobytes(), pilImage.size, pilImage.mode)
