@@ -35,7 +35,7 @@ class Creature(pygame.sprite.Sprite):
 
     def generate_random_y(self):
         return random.randrange(
-            MIN_Y, SCREEN_HEIGHT * MAX_Y_SCALE, Y_STEP  
+            MIN_Y, int(SCREEN_HEIGHT * MAX_Y_SCALE), Y_STEP  
         )
         
     def update_scale(self, new_y):
