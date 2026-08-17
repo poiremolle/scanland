@@ -45,8 +45,8 @@ class Creature(pygame.sprite.Sprite):
             )
         self.rect = self.image.get_rect()
 
-    def update_position(self, new_y):
-        self.rect.x = -self.rect.w
+    def update_position(self, new_x, new_y):
+        self.rect.x = new_x
         self.rect.y = new_y
 
     def animate_bounce(self):
