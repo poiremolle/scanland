@@ -31,3 +31,12 @@ def test_remove_from_screen(creature):
     current_len = len(all_sprites)
     creature.remove_from_screen()
     assert len(all_sprites) == current_len - 1
+
+def test_update_scale(creature):
+    test_scale = 0.5
+    expected_width = creature.image.get_width() * test_scale
+    expected_height = creature.image.get_height() * test_scale
+    creature.update_scale_from_original(test_scale)
+
+    assert creature.image.get_width() == expected_width
+    assert creature.image.get_height() == expected_height
