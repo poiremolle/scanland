@@ -54,11 +54,14 @@ class Creature(pygame.sprite.Sprite):
 
     def generate_random_y(self):
         return random.randrange(
-            MIN_Y, int(SCREEN_HEIGHT * MAX_Y_SCALE), Y_STEP  
+            0, int(SCREEN_HEIGHT * MAX_Y_SCALE), Y_STEP  
         )
 
     def calculate_scale_from_y(self, y):
-        return max(MIN_Y, y) / SCREEN_HEIGHT
+        return self.map_range(y, 0, SCREEN_HEIGHT, 0.2, 1)
+    
+    def map_range(self, value, input_min, input_max, output_min, output_max):
+        return (value - input_min) * (output_max - output_min) / (input_max - input_min) + output_min
 
     def update_scale_from_original(self, scale):
         self.image = pygame.transform.scale_by(
