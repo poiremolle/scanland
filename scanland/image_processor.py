@@ -2,6 +2,7 @@
 from threading import Thread
 from queue import Queue
 from PIL import Image
+from scanland.constants import MAX_IMAGE_HEIGHT
 
 class ImageProcessor:
     def __init__(self, input_queue: Queue, output_queue: Queue):
@@ -24,14 +25,22 @@ class ImageProcessor:
         self.processing_thread.join()
       
     def process_image(self, path):
-        transparent_image = self.remove_white_background(path)
-        return self.pil_to_tuple(transparent_image)
+        img = Image.open(path)
+        
+        resized_image = self.resize_image(img)
+        transparent_image = self.make_white_pixels_transparent(resized_image)
 
-    def remove_white_background(self, image_path, threshold=220):
-        img = Image.open(image_path)
+        return self.pil_to_tuple(transparent_image)
+    
+    def resize_image(self, img):
+        max_size = (MAX_IMAGE_HEIGHT, MAX_IMAGE_HEIGHT)
+        img.thumbnail(max_size)
+        return img
+
+    def remove_white_background(self, img, threshold=220):
         return self.make_white_pixels_transparent(img, threshold)
 
-    def make_white_pixels_transparent(self, img, threshold):
+    def make_white_pixels_transparent(self, img, threshold=220):   
         img = img.convert("RGBA")
 
         pixeldata = img.getdata()
